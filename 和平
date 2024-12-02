@@ -1,0 +1,390 @@
+
+
+
+
+
+
+
+
+
+
+
+mkdir /data/小叽猪
+rm -r /data/小叽猪/26
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!/bin/barc
+#CN_obi写 QQ201118023
+clear
+Black='\033[0;30m'        # Black
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
+Blue='\033[0;34m'         # Blue
+Magenta='\033[0;35m'      # Magenta
+Cyan='\033[0;36m'         # Cyan
+White='\033[0;37m'        # White
+
+
+
+
+
+FILE=卡密
+if [ ! -f "$FILE" ]; then
+echo "请把卡密储存到${Red}➡"${Cyan}卡密${Red}⬅︎的文件里""
+    echo "
+卡密输入到第一行" > 卡密
+exit
+fi
+
+
+echo -e "${Cyan}TG${Red} https://t.me/+r9GP-CsC1UhjNGM1"${Green}
+echo "
+⠀⠀⠀⠀⠀⠀⠀⠀⣶⣶⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀
+⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠿⠿⢿⣿⡿⠿⠇⠘⠛⠛⠛⠛⠛⢻⣿⠇⠀⠀⠀⠀⠀
+⠀⠿⠿⡀⠀⣀⣀⠐⢿⣶⡄⠀⣠⣦⡀⠸⠿⠀⠀⠀⠀⠀⣿⡿⠀⠀⠀⠀⣿⣿⠀⠀⠀⣾⣿⠀⠀
+⠀⢀⣼⣿⠃⣿⣿⠀⢀⣩⣴⣿⠟⠋⢤⣶⡀⠀⠀⠀⠀⣼⣿⣥⣤⣤⡀⠀⣿⡟⠀⠀⠀⣿⣿⠀⠀⠀⠀
+⠀⠘⠟⢁⣀⣿⣿⣾⡿⠟⠋⠀⢰⣦⠌⢻⣿⡆⠀⠀⣼⣿⣿⠛⢻⣿⡇⢀⣿⣷⣶⣶⣶⣿⣿⣶⡆⠀
+⠰⣶⣾⡿⠟⠻⣿⣷⣶⣶⣶⣶⣿⡟⠀⠀⠁⠀⠀⠀⠟⢹⣿⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀
+⠀⠉⢠⣤⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⣴⣶⠀⠀⠀⠀⠀⢸⣿⠀⢸⣿⡇⣿⣿⣿⣿⣿⣿⡇⢸⣿⠇⠀⠀
+⠀⠀⢸⣿⣀⣀⣀⣀⣿⣿⣀⣀⣀⣀⣿⣿⠀⠀⠀⠀⠀⢸⣿⣶⣾⣿⡇⠀⠀⠀⠀⠀⠀⢀⣸⣿⠀⠀
+⠀⠀⠘⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⣿⣿⠀⠀⠀⠀⠀⠸⠿⠀⠘⠛⠃⠀⠀⠀⠸⠿⠿⠿⠿⠋⠀⠀"
+echo "请把卡密储存到${Red}➡"${Cyan}卡密${Red}⬅︎的文件里""
+file_content=$(cat 卡密)
+read -r file_content <卡密
+
+
+while true
+do
+if ip link show tun0 > /dev/null 2>&1; then
+    echo "禁止抓包"
+    exit 1 
+fi
+#微验Shell模板
+
+
+
+if ! [ -e "rc4" ]; then
+    echo "rc4文件缺失"
+    exit 1
+fi
+chmod 777 rc4
+
+#配置区
+wyUrl="http://wy.llua.cn/api/" #API接口(一般不用改)
+wyAppid="75045" #APPID(应用ID)
+wyAppkey="c9Y9s9YSHS9H2Vvc" #APPKEY(应用秘钥)
+wyRc4key="iiJjORIjVG975045" #Rc4KEY(Rc4秘钥)
+deCode="200" #code(登录自定义状态码)
+
+
+#函数区
+parse_json() {
+  json=$1
+  query=$2
+  value=$(echo "$json" | grep -o "\"$query\":[^ }]*" | sed 's/"[^"]*":\([^,}]*\).*/\1/' | head -n 1)
+  value="${value#\"}"
+  value="${value%\"}"
+  echo "$value"
+}
+
+#公告区
+notice=`curl -s "${wyUrl}?id=notice&app=${wyAppid}"`
+deNotice=`./rc4 $notice $wyRc4key "de"`
+Notices=`parse_json "$deNotice" "app_gg"`
+#echo "系统公告:\n${Notices}\n"
+
+
+#验证区
+echo 上传在线数据
+echo ${Green}次数${Red}-1
+kami=$file_content
+
+timer=`date +%s`
+android_id=`settings get secure android_id`
+fingerprint=`getprop ro.build.fingerprint`
+imei=`echo -n "${android_id}.${fingerprint}" | md5sum | awk '{print $1}'`
+value="$RANDOM${timer}"
+sign=`echo -n "kami=${kami}&markcode=${imei}&t=${timer}&${wyAppkey}" | md5sum | awk '{print $1}'`
+data=`./rc4 "kami=${kami}&markcode=${imei}&t=${timer}&sign=${sign}&value=${value}&${wyAppkey}" $wyRc4key "en"`
+logon=`curl -s "${wyUrl}?id=kmlogon&app=${wyAppid}&data=${data}"`
+deLogon=`./rc4 $logon $wyRc4key "de"`
+wy_Code=`parse_json "$deLogon" "code"`
+if  [ "$wy_Code" -eq "$deCode" ]; then
+    timec=`parse_json "$deLogon" "time"`
+    check=`echo -n  "${timec}${wyAppkey}${value}" | md5sum | awk '{print $1}'`
+    checks=`parse_json "$deLogon" "check"`
+    if  [ "$check" == "$checks" ]; then
+        vip=`parse_json "$deLogon" "vip"`
+        vips=`date -d @$vip +"%Y-%m-%d %H:%M:%S"`
+        clear
+        echo "登录成功，到期时间：${vips}"
+    else
+        echo "校验失败"
+        exit
+    fi
+else
+    parse_json "$deLogon" "msg"
+    exit
+fi
+
+
+
+
+#clear
+RELEASE=`date +%Y:%m:%d:%H:%M:%S`
+
+
+echo -e "\033[33m
+
+${Black}⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣤⣤⡄⠀⠀⠀⠀⠀⠀⠀⣠⣤⡀⠀⠀⢀⣄⠀⠀⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Green}⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⠀⠀⣿⣿⡿⠿⠿⠿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣄⣠⣿⣿⠃⢠⣤⣤⣤⣿⣿⣧⣤⣤⡄⠀⣰⣿⡦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Yellow}⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⠟⠁⠀⠈⠛⠛⠛⣿⣿⡟⠛⠛⢃⣾⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Blue}⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⡟⠀⠀⠀⢸⣿⣿⠀⠀⠀⢻⣿⣷⡀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⡄⠀⢀⣀⣀⣀⣀⣿⣿⣇⣀⣴⣿⣿⣁⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Magenta}⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⠁⠀⠀⠀⢸⣿⣿⠀⠀⠀⠈⢿⣿⣷⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠈⠿⠛⠁⢸⣿⣧⠀⠸⠿⠿⠿⠿⠿⣿⣿⣿⣿⠿⠿⠿⠿⠿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Cyan}⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠇⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠘⣿⣿⣧⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⠀⠀⠀⠀⠀⣠⣶⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${White}⠀⠀⠀⠀⠀⠀⢀⣿⣿⡟⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠸⣿⣿⣆⠀⠀⠀⠀⢸⣿⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿⠇⠀⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⡇⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Black}⠀⠀⠀⠀⠀⢀⣾⣿⡿⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⢹⣿⣿⡆⠀⠀⠀⢸⣿⣿⠀⠀⢸⣿⡇⠀⢸⣿⣿⠀⠀⠀⠀⢸⣿⡇⠀⠀⣄⡀⠀⠀⢠⣾⣿⠟⠁⣿⣿⡇⣿⣿⢿⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Red}⠀⠀⠀⠀⠀⠸⢿⣿⠁⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⢻⠿⠟⠀⠀⠀⢸⣿⣿⣶⣶⣾⣿⡇⠀⣼⣿⡟⠀⠀⠀⠀⢸⣿⡇⠀⠀⣿⡏⠀⠀⠀⠟⠁⠀⠀⣿⣿⡇⠈⠀⢸⣿⣿⣶⣶⣶⣶⣶⣶⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Green}⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠛⠛⠛⠛⠁⣰⣿⣿⠃⠀⠀⠀⠀⢸⣿⡇⠀⢠⣿⡇⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Yellow}⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣶⣶⣶⣶⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠛⠛⠀⠀⠀⢀⣼⣿⣿⠃⠀⠀⠀⠀⠀⢸⣿⣿⣶⣾⣿⠃⠀⠀⠀⣤⣤⣤⣴⣿⣿⠁⠀⠀⢸⣿⣿⣶⣶⣶⣶⣶⣶⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+${Blue}⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠿⠿⠿⠟⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠿⠁⠀⠀⠀⠀⠀⠀⠀⠙⠛⠛⠛⠁⠀⠀⠀⠀⠹⠿⠿⠿⠛⠁⠀⠀⠀⢸⣿⡿⠉⠉⠉⠉⠉⠉⢿⣿⡇⠀⠀"
+
+
+printf "${GRE}\n\n\n\n\n\n"
+printf \\n
+echo -e "\n"
+#echo -e "\033[5;46;46;37m              菜单    $RELEASE    \033[0m "
+echo -e "\n\n"
+
+(FILE=/storage/emulated/0/1
+if [ ! -f "$FILE" ]; then
+a=关闭中
+
+fi
+echo -e  ${Green}⠀  "      内部项目    "        ${Red}  
+
+
+
+)
+printf "${GRE}\n" 
+(FILE=/storage/emulated/0/2
+if [ ! -f "$FILE" ]; then
+b=关闭中
+
+fi
+#echo -e  ${Green}⠀  "         【 2 大厅开启 】               "        ${Red}  $b
+)
+printf "${GRE}\n"
+(FILE=/storage/emulated/0/3
+if [ ! -f "$FILE" ]; then
+c=关闭中
+
+fi
+#echo -e  ${Green}⠀  "         【 3 和平强力清理 】           "          ${Red} $c
+)
+printf "${GRE}\n"
+#echo -e  ${White}  "             4  关闭防封                    "                
+
+
+
+printf "${GRE}\n"
+(FILE=/storage/emulated/0/4
+if [ ! -f "$FILE" ]; then
+d=关闭中
+
+fi
+#echo -e  ${Cyan}⠀⠀  "         【  5  跳转频道  】                         "       
+)
+printf "${GRE}\n"
+
+
+#echo -e  ${Green}⠀  "         游戏未启动前${Red} $c"${Cyan}⠀开1"       "${Red}启动游戏到大厅后${Cyan}⠀开2"       "  
+
+
+
+printf "${GRE}\n"
+read a </dev/tty
+
+
+
+if ip link show tun0 > /dev/null 2>&1; then
+    echo "禁止抓包"
+    exit 1 
+fi
+
+
+
+
+case $a in
+1)
+
+clear
+RELEASE=`date +%Y:%m:%d:%H:%M:%S`
+printf "${GRE}\n\n\n\n\n\n\n\n\n"
+
+clear
+
+rm -r /storage/emulated/0/1
+rm -r /storage/emulated/0/2
+rm -r /storage/emulated/0/3
+rm -r /storage/emulated/0/4
+clear
+curl -o /data/小叽猪/26  https://github.moeyy.xyz/https://raw.githubusercontent.com/hahaha123HA123/HPJY/main/ces.sh 
+clear
+mkdir /data/小叽猪
+clear
+         chmod 777 /data/小叽猪/26
+         /data/小叽猪/26
+         
+
+echo 嘿嘿 > /storage/emulated/0/1
+echo -e "\033[5;46;42;37m            回车继续执行                 \033[0m"
+read </dev/tty
+1
+;;
+2)
+
+clear
+#清除所有规则
+
+
+
+curl -o /data/小叽猪/26  https://github.moeyy.xyz/https://raw.githubusercontent.com/hahaha123HA123/HPJY/main/FS.sh 
+
+clear
+mkdir /data/小叽猪
+clear
+         chmod 777 /data/小叽猪/26
+         /data/小叽猪/26
+         
+
+echo 嘿嘿 > /storage/emulated/0/2
+echo -e "\033[5;46;42;37m            回车继续执行                 \033[0m"
+
+read </dev/tty
+2
+;;
+3)
+
+echo -e  ${Green}⠀                功能菜单    $RELEASE
+echo -e "\n\n"
+echo -e  ${Green}⠀  "         【 1 宝可梦上分追踪 】               "     
+printf "${GRE}\n" 
+echo -e  ${Green}⠀  "         【 2     dy追踪     】               "     
+printf "${GRE}\n"
+read a </dev/tty
+case $a in
+1)
+
+clear
+curl -o /data/小叽猪/26  https://github.moeyy.xyz/https://raw.githubusercontent.com/hahaha123HA123/HPJY/main/QL.sh 
+clear
+mkdir /data/小叽猪
+clear
+         chmod 777 /data/小叽猪/26
+         /data/小叽猪/26
+         
+echo -e "\033[5;46;42;37m            回车继续执行                 \033[0m"
+1
+;;
+2)
+
+clear
+#清除所有规则
+
+cd /data/local/tmp/
+/data/local/tmp/启动器-和平.sh
+
+echo -e "\033[5;46;42;37m            回车继续执行                 \033[0m"
+2
+;;
+3)
+
+exit 1
+;;
+esac
+         
+echo -e "\033[5;46;42;37m            回车继续执行                 \033[0m"
+read </dev/tty
+
+
+3
+;;
+4)
+
+rm -r /storage/emulated/0/1
+rm -r /storage/emulated/0/2
+rm -r /storage/emulated/0/3
+rm -r /storage/emulated/0/4
+clear
+iptables -F 
+iptables -X 
+iptables -Z
+iptables -F 
+iptables -X 
+iptables -Z
+echo -e "\033[5;46;42;37m           关闭成功 回车继续执行                 \033[0m"
+read </dev/tty
+
+
+
+
+4
+;;
+5)
+
+
+         clear
+
+am start -a android.intent.action.VIEW -d https://t.me/+r9GP-CsC1UhjNGM1
+
+
+
+
+echo -e "\033[5;46;42;37m            回车继续执行                 \033[0m"
+read </dev/tty
+
+
+
+;;
+esac
+done
